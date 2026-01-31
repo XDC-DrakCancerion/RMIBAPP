@@ -173,8 +173,83 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
 
           <a class="px-6 py-3 rounded-xl border bg-white hover:bg-slate-50" href="hasil.php">Lihat Hasil</a>
         </div>
+      </div>
+
+      <!-- MODE OFFLINE -->
+      <div class="mt-6 border rounded-xl p-5 bg-slate-50">
+        <div class="font-semibold">Mode Offline (PWA)</div>
+        <p class="text-sm text-slate-600 mt-1">
+          Siapkan paket tes saat online agar tes bisa dimulai dari nol ketika internet mati.
+          Hasil offline ditandai sementara sampai tersinkron.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <a class="px-5 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
+             href="../offline/tes.html">Buka Tes Offline</a>
+          <button id="btnPack"
+             class="px-5 py-3 rounded-xl border bg-white hover:bg-slate-50">Siapkan Paket Offline</button>
+        </div>
+        <div id="packStatus" class="text-xs text-slate-500 mt-2"></div>
+      </div>
         </div>
       </div>
+
+<script>
+(function(){
+  const PACK_KEY = 'rmib_test_pack';
+  const PACK_TTL = 7 * 24 * 60 * 60 * 1000; // 7 hari
+  const statusEl = document.getElementById('packStatus');
+  const btn = document.getElementById('btnPack');
+
+  function setStatus(msg){ if(statusEl) statusEl.textContent = msg; }
+
+  function isStale(pack){
+    if(!pack || !pack.cached_at) return true;
+    const ts = Date.parse(pack.cached_at);
+    if(Number.isNaN(ts)) return true;
+    return (Date.now() - ts) > PACK_TTL;
+  }
+
+  async function fetchPack(){
+    if (!navigator.onLine) {
+      setStatus('Offline: sambungkan internet untuk mengunduh paket.');
+      return;
+    }
+    setStatus('Mengunduh paket tes...');
+    try {
+      const resp = await fetch('api_test_pack.php', {credentials: 'include'});
+      const text = await resp.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error('Sesi login habis. Silakan login ulang.');
+      }
+      if (!resp.ok || !data.ok) throw new Error(data.message || 'Gagal memuat paket.');
+      data.cached_at = new Date().toISOString();
+      localStorage.setItem(PACK_KEY, JSON.stringify(data));
+      setStatus('Paket tes tersimpan untuk offline.');
+    } catch (e) {
+      setStatus('Gagal mengunduh paket: ' + e.message);
+    }
+  }
+
+  try {
+    const packRaw = localStorage.getItem(PACK_KEY);
+    const pack = packRaw ? JSON.parse(packRaw) : null;
+    if (pack && !isStale(pack)) {
+      setStatus('Paket offline siap (tersimpan).');
+    } else {
+      setStatus('Paket offline belum siap.');
+      // auto-prepare saat online
+      fetchPack();
+    }
+  } catch (e) {
+    setStatus('Paket offline belum siap.');
+  }
+
+  if (btn) btn.addEventListener('click', fetchPack);
+})();
+</script>
 
     </div>
   </main>

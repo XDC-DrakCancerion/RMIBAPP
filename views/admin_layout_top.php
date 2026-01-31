@@ -4,6 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -73,6 +76,14 @@ $roleLabel = 'Admin';
     document.addEventListener('click', () => {
       if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
     });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
   }
 })();
 </script>

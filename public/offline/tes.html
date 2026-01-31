@@ -1,0 +1,135 @@
+﻿<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="../icons/icon-192.png" />
+  <link rel="stylesheet" href="./tes.css" />
+  <title>Tes RMIB Offline</title>
+</head>
+<body>
+  <header class="app-header">
+    <div class="title">
+      <div class="app-name">Sistem RMIB</div>
+      <div class="app-sub">Tes Offline</div>
+    </div>
+    <div class="status">
+      <span id="netBadge" class="badge">Online</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="sectionNoUser" class="card hidden">
+      <h2>Login diperlukan</h2>
+      <p>Mode offline hanya bisa dipakai di perangkat yang sudah pernah login.</p>
+      <a class="btn" href="/login.php">Buka Login</a>
+    </section>
+
+    <section id="sectionNoPack" class="card hidden">
+      <h2>Paket tes belum siap</h2>
+      <p>Silakan online untuk mengunduh paket tes agar bisa mulai dari nol saat offline.</p>
+      <div class="row">
+        <button id="btnDownloadPack" class="btn">Unduh Paket Tes</button>
+        <span id="packStatus" class="muted"></span>
+      </div>
+    </section>
+
+    <section id="sectionHome" class="card hidden">
+      <div class="row between">
+        <div>
+          <h2>Siap Tes Offline</h2>
+          <div id="userInfo" class="muted"></div>
+        </div>
+        <button id="btnReset" class="btn secondary">Reset</button>
+      </div>
+      <p class="muted">Paket tes tersimpan di perangkat ini. Hasil offline akan ditandai sementara sampai tersinkron.</p>
+      <div class="row gap">
+        <button id="btnStart" class="btn">Mulai Tes Offline</button>
+        <button id="btnResume" class="btn secondary">Lanjutkan Tes</button>
+      </div>
+    </section>
+
+    <section id="sectionTest" class="card hidden">
+      <div class="row between">
+        <div>
+          <h2>Kelompok <span id="groupTitle">A</span></h2>
+          <div id="testInfo" class="muted"></div>
+        </div>
+        <div class="row gap">
+          <button id="btnBackHome" class="btn secondary">Beranda</button>
+        </div>
+      </div>
+
+      <div id="groupNav" class="group-nav"></div>
+
+      <div id="errorBox" class="error hidden"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:60px">No</th>
+              <th>Pekerjaan</th>
+              <th style="width:140px">Peringkat</th>
+            </tr>
+          </thead>
+          <tbody id="jobsBody"></tbody>
+        </table>
+      </div>
+
+      <div class="row between">
+        <button id="btnPrev" class="btn secondary">Sebelumnya</button>
+        <button id="btnNext" class="btn">Selanjutnya</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div>
+        <h3>3 Pekerjaan Favorit</h3>
+        <div class="row gap">
+          <input id="fav1" class="input" placeholder="Favorit 1" maxlength="80" />
+          <input id="fav2" class="input" placeholder="Favorit 2" maxlength="80" />
+          <input id="fav3" class="input" placeholder="Favorit 3" maxlength="80" />
+        </div>
+      </div>
+    </section>
+
+    <section id="sectionResult" class="card hidden">
+      <div class="row between">
+        <div>
+          <h2>Hasil Sementara</h2>
+          <div class="muted">Hasil offline (sementara) sampai tersinkron.</div>
+        </div>
+        <button id="btnResultHome" class="btn secondary">Beranda</button>
+      </div>
+
+      <div id="resultTop3" class="result-top3"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kategori</th>
+              <th>Jumlah</th>
+              <th>Rank</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+
+      <div id="resultTotal" class="muted"></div>
+
+      <div class="row gap">
+        <button id="btnSync" class="btn">Sinkronkan</button>
+        <a id="btnOpenResult" class="btn secondary hidden" href="../peserta/hasil.php">Lihat Hasil Resmi</a>
+      </div>
+      <div id="syncStatus" class="muted"></div>
+    </section>
+  </main>
+
+  <script src="./tes.js"></script>
+</body>
+</html>

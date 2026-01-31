@@ -29,6 +29,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'role'          => (int)$user['role'],
     ];
 
+    // tambahan data peserta untuk kebutuhan offline (role=2)
+    if ((int)$user['role'] === 2) {
+      $stp = db()->prepare("SELECT id_peserta, nama, jenis_kelamin, pendidikan, tgl_lahir
+                            FROM tbl_peserta WHERE id_pengguna=? LIMIT 1");
+      $stp->execute([(int)$user['id_pengguna']]);
+      $peserta = $stp->fetch();
+      if ($peserta) {
+        $_SESSION['user']['id_peserta'] = (int)$peserta['id_peserta'];
+        $_SESSION['user']['nama_peserta'] = (string)($peserta['nama'] ?? '');
+        $_SESSION['user']['jenis_kelamin'] = (string)($peserta['jenis_kelamin'] ?? '');
+        $_SESSION['user']['pendidikan'] = (string)($peserta['pendidikan'] ?? '');
+        $_SESSION['user']['tgl_lahir'] = (string)($peserta['tgl_lahir'] ?? '');
+      }
+    }
+
     // redirect berdasarkan role
     if ((int)$user['role'] === 1) redirect('admin/dashboard.php');
     redirect('peserta/dashboard.php');
@@ -42,6 +57,9 @@ $title = "Login RMIB";
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
   <title><?= e($title) ?></title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -81,5 +99,11 @@ $title = "Login RMIB";
       </form>
     </div>
   </div>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+  </script>
 </body>
 </html>
