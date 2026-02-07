@@ -40,18 +40,7 @@ $roleLabel = 'Peserta';
           <div class="text-sm font-semibold text-slate-900"><?= e($roleLabel) ?></div>
           <div class="text-xs text-slate-500"><?= e($namaUser) ?></div>
         </div>
-
-        <svg class="h-4 w-4 text-slate-600" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd"/>
-        </svg>
       </button>
-
-      <div id="profileMenu"
-        class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-2xl shadow-sm overflow-hidden">
-        <a href="../logout.php" class="block px-4 py-3 text-sm hover:bg-slate-50 text-red-600 font-semibold">
-          Logout
-        </a>
-      </div>
     </div>
   </div>
 </header>
