@@ -235,7 +235,7 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
 
       <!-- Hasil (Top 3 berdasarkan rank) -->
       <div class="mt-8 text-lg">
-        <div class="font-semibold mb-2">Hasil</div>
+        <div class="font-semibold mb-2">Hasil Rekomendasi:</div>
 
         <?php foreach ($top3 as $i => $cat): ?>
           <div class="mb-4">

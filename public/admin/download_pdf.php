@@ -218,7 +218,7 @@ foreach ($categories as $cat) {
 
 $html .= '</tbody></table>
 
-  <div class="section"><b>Hasil</b>';
+  <div class="section"><b>Hasil Rekomendasi:</b>';
 
 foreach ($top3 as $i => $cat) {
   $html .= '<div style="margin-top:6px;"><b>'.($i+1).'. Kategori '.$cat.'</b><br>';
