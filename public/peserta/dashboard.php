@@ -7,13 +7,19 @@ $stmt = db()->prepare("SELECT id_peserta FROM tbl_peserta WHERE id_pengguna=?");
 $stmt->execute([$userId]);
 $id_peserta = (int)($stmt->fetchColumn() ?: 0);
 
-$stmt = db()->prepare("SELECT COUNT(*) FROM tbl_sesi_rmib WHERE id_peserta=?");
-$stmt->execute([$id_peserta]);
-$tesCount = (int)$stmt->fetchColumn();
+$totalSesi  = (int)db()->query("SELECT COUNT(*) FROM tbl_sesi_rmib")->fetchColumn();
 
-$stmt = db()->prepare("SELECT COUNT(*) FROM tbl_sesi_rmib WHERE id_peserta=? AND status='selesai'");
-$stmt->execute([$id_peserta]);
-$hasilCount = (int)$stmt->fetchColumn();
+// Hitung sesi selesai dari status
+$sesiSelesai = 0;
+try {
+  $sesiSelesai = (int)db()->query("
+    SELECT COUNT(*)
+    FROM tbl_sesi_rmib
+    WHERE status='selesai'
+  ")->fetchColumn();
+} catch (Throwable $e) {
+  $sesiSelesai = 0;
+}
 
 $title = "Dashboard Peserta";
 $active = "dashboard";
@@ -36,20 +42,20 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
           </svg>
           <span>Dashboard</span>
         </h1>
-        <p class="text-slate-500">Selamat datang, <?= e($_SESSION['user']['nama_lengkap']) ?>.</p>
+        <p class="text-slate-500">Selamat datang Di Sistem Rekomendasi Pemilihan Jurusan Perguruan Tinggi Mengunakan Tes RMIB.</p>
       </div>
     </div>
 
     <div class="grid md:grid-cols-4 gap-4 mb-6">
       <div class="bg-white border rounded-2xl p-5">
         <div class="text-sm text-slate-500">Sesi Tes</div>
-        <div class="text-2xl font-semibold mt-1"><?= $tesCount ?></div>
+        <div class="text-2xl font-semibold mt-1"><?= $totalSesi ?></div>
       </div>
 
       <div class="bg-white border rounded-2xl p-5">
         <div class="text-sm text-slate-500">Riwayat Hasil</div>
-        <div class="text-2xl font-semibold mt-1"><?= $hasilCount ?></div>
-        <div class="text-xs text-slate-500 mt-2">Hasil: <?= $hasilCount ?></div>
+        <div class="text-2xl font-semibold mt-1"><?= $sesiSelesai ?></div>
+        <div class="text-xs text-slate-500 mt-2">Hasil: <?= $sesiSelesai ?></div>
       </div>
     </div>
 

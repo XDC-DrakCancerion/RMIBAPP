@@ -62,6 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nums[] = $v;
   }
 
+  // Validasi unik: tidak boleh ada duplikat
+  if (!$error && count($nums) !== count(array_unique($nums))) {
+    $error = "Peringkat harus unik 1–12 tanpa duplikat.";
+  }
+
   // Jika tidak ada error, simpan jawaban
   if (!$error) {
     db()->beginTransaction();
@@ -78,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $ins = db()->prepare("INSERT INTO tbl_jawaban_rmib (id_sesi, id_pekerjaan, peringkat, kelompok) VALUES (?,?,?,?)");
       foreach ($jobs as $job) {
         $pid = (int)$job['id_pekerjaan'];
-        $ins->execute([$sesi, $pid, (int)$ranks[$pid], $k]); // Tambahkan 'kelompok' di sini
+        $ins->execute([$sesi, $pid, (int)$ranks[$pid], $k]);
       }
       db()->commit();
 
@@ -137,13 +142,9 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
                 <td class="py-3 pr-4"><?= $i+1 ?></td>
                 <td class="py-3 pr-4"><?= e($job['nama_pekerjaan']) ?></td>
                 <td class="py-3 pr-4">
-                  <select name="rank[<?= $pid ?>]" required
-                          class="w-full px-3 py-2 rounded-xl border bg-white focus:ring-2 focus:ring-slate-900/20">
-                    <option value="">Pilih</option>
-                    <?php for ($n=1;$n<=12;$n++): ?>
-                      <option value="<?= $n ?>" <?= (isset($pref[$pid]) && $pref[$pid]===$n) ? 'selected':'' ?>><?= $n ?></option>
-                    <?php endfor; ?>
-                  </select>
+                  <input type="number" name="rank[<?= $pid ?>]" min="1" max="12" step="1"
+                         value="<?= $pref[$pid] ?? '' ?>"
+                         class="w-full px-3 py-2 rounded-xl border bg-white focus:ring-2 focus:ring-slate-900/20">
                 </td>
               </tr>
             <?php endforeach; ?>
