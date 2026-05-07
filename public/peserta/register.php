@@ -50,9 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $title = "Register Peserta";
-include __DIR__ . '/../../views/peserta_layout_top.php';
 ?>
-
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <title><?= e($title) ?></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 <div class="min-h-screen flex items-center justify-center p-6">
   <div class="w-full max-w-md bg-white rounded-2xl shadow-sm border p-6">
     <div class="text-center mb-6">
@@ -62,7 +71,7 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
     </div>
 
     <div class="grid grid-cols-2 gap-2 mb-6">
-      <a class="text-center py-2 rounded-xl bg-slate-100 hover:bg-slate-200 font-medium" href="../login.php">Login</a>
+      <a class="text-center py-2 rounded-xl bg-slate-100 text-black hover:bg-slate-200 font-medium" href="../login.php">Login</a>
       <a class="text-center py-2 rounded-xl bg-slate-900 text-white font-medium" href="register.php">Register</a>
     </div>
 
@@ -73,42 +82,59 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
       <div class="mb-4 p-3 rounded-xl bg-green-50 text-green-800 border border-green-200"><?= e($success) ?></div>
     <?php endif; ?>
 
-    <form method="post" class="space-y-4">
-      <div><label class="text-sm font-medium">Nama Lengkap</label>
+      <form method="post" class="space-y-4">
+      
+      <div>
+        <label class="text-sm font-medium text-black">Nama Lengkap</label>
         <input name="nama_lengkap" required maxlength="30"
-          class="mt-1 w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-slate-900/20"></div>
+          class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
+      </div>
 
-      <div><label class="text-sm font-medium">Username</label>
+      <div>
+        <label class="text-sm font-medium text-black">Username</label>
         <input name="username" required maxlength="25"
-          class="mt-1 w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-slate-900/20"></div>
+          class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
+      </div>
 
-      <div><label class="text-sm font-medium">Jenis Kelamin</label>
+      <div>
+        <label class="text-sm font-medium text-black">Jenis Kelamin</label>
         <select name="jenis_kelamin" required
-          class="mt-1 w-full px-4 py-3 rounded-xl border bg-white focus:ring-2 focus:ring-slate-900/20">
+          class="mt-1 w-full px-4 py-3 rounded-xl border bg-white text-black focus:ring-2 focus:ring-slate-900/20">
           <option value="">Pilih</option>
           <option value="L">Laki-laki</option>
           <option value="P">Perempuan</option>
-        </select></div>
+        </select>
+      </div>
 
-      <div><label class="text-sm font-medium">Tanggal Lahir</label>
+      <div>
+        <label class="text-sm font-medium text-black">Tanggal Lahir</label>
         <input type="date" name="tgl_lahir" required
-          class="mt-1 w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-slate-900/20"></div>
+          class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
+      </div>
 
-      <div><label class="text-sm font-medium">Pendidikan</label>
+      <div>
+        <label class="text-sm font-medium text-black">Pendidikan</label>
         <input name="pendidikan" required maxlength="20"
-          class="mt-1 w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-slate-900/20"></div>
+          class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
+      </div>
 
-      <div><label class="text-sm font-medium">Password</label>
+      <div>
+        <label class="text-sm font-medium text-black">Password</label>
         <input type="password" name="password" required
-          class="mt-1 w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-slate-900/20"></div>
+          class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
+      </div>
 
-      <div><label class="text-sm font-medium">Ulang Password</label>
+      <div>
+        <label class="text-sm font-medium text-black">Ulang Password</label>
         <input type="password" name="ulang_password" required
-          class="mt-1 w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-slate-900/20"></div>
+          class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
+      </div>
+
+    </form>
 
       <button class="w-full py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">Register</button>
     </form>
   </div>
 </div>
-
-<?php include __DIR__ . '/../../views/peserta_layout_bottom.php'; ?>
+</body>
+</html>
