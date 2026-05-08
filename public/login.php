@@ -64,7 +64,7 @@ $title = "Login RMIB";
   <style>
     .login-bg {
       background-image:
-        linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
+        linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.78)),
         url('/icons/login.jpg');
       background-size: cover;
       background-position: center;
