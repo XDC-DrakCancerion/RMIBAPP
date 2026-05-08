@@ -54,7 +54,7 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
           <span>Hasil Tes</span>
         </h1>
 
-    <div class="bg-white border rounded-2xl p-6">
+    <div class="bg-white border rounded-2xl p-6 text-black">
       <div class="overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead>

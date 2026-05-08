@@ -146,7 +146,7 @@ $active = "hasil";
 include __DIR__ . '/../../views/peserta_layout_top.php';
 ?>
 
-<div class="flex">
+<div class="flex text-black">
   <?php include __DIR__ . '/../../views/peserta_sidebar.php'; ?>
 
   <main class="flex-1 p-6">

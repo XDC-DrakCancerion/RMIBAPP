@@ -92,12 +92,11 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
       <div class="mb-4 p-3 rounded-xl bg-red-50 text-red-700 border border-red-200"><?= e($error) ?></div>
     <?php endif; ?>
 
-    <div class="bg-white border rounded-2xl p-6">
-
+    <div class="bg-white border rounded-2xl p-6 ">
       <!-- PETUNJUK (seperti gambar) -->
-      <div class="border-2 border-blue-500 rounded-xl p-5">
-        <div class="font-semibold mb-2">Petunjuk :</div>
-        <div class="text-slate-700 leading-relaxed text-sm">
+      <div class="border-2 border-blue-500 rounded-xl p-5 text-black">
+        <div class="font-semibold mb-2 text-black">Petunjuk :</div>
+        <div class="text-black leading-relaxed text-sm">
           <p style="text-align: justify; text-indent: 3ch;">
             Di bawah ini akan Anda temui daftar-daftar berbagai macam pekerjaan yang tersusun dalam beberapa kelompok.
             Setiap kelompok terdiri dari 12 macam pekerjaan. Setiap pekerjaan merupakan keahlian khusus yang memerlukan
@@ -105,13 +104,15 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
             Di sini Anda diminta untuk memilih pekerjaan mana yang ingin Anda lakukan atau pekerjaan mana yang Anda sukai,
             terlepas dari besarnya upah atau gaji yang akan diterima. Juga terlepas dari apakah Anda berhasil atau tidak
             dalam mengerjakan pekerjaan tersebut.
-          </p><br>
+          </p>
+          <br>
           <p style="text-align: justify; text-indent: 3ch;">
             Tugas Anda adalah mencantumkan nomor atau angka pada setiap pekerjaan dalam kelompok-kelompok yang tersedia.
             Berikanlah nomor satu untuk pekerjaan yang paling Anda sukai di antara kedua belas pekerjaan pada setiap kelompok,
             lalu nomor dua, tiga, dan seterusnya berurutan berdasarkan kadar kesukaan atau minat Anda, dan nomor dua belas
             untuk pekerjaan yang paling tidak Anda sukai.
-          </p><br>
+          </p>
+          <br>
           <p style="text-align: justify; text-indent: 3ch;">
             Bekerjalah secepatnya, dan tulislah nomor-nomor sesuai dengan kesan dan keinginan Anda yang pertama muncul.
             <br>
@@ -121,7 +122,7 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
       </div>
 
       <!-- FORM 3 PEKERJAAN FAVORIT -->
-      <div class="mt-5 border rounded-xl p-5 bg-slate-50">
+      <div class="mt-5 border rounded-xl p-5 bg-slate-50 text-black">
         <div class="font-semibold mb-2">
           Tulislah di bawah ini 3 (tiga) macam pekerjaan yang paling ingin Anda lakukan atau paling Anda sukai
           <span class="text-slate-500 font-normal">(tidak harus tercantum dalam daftar)</span>
@@ -133,21 +134,21 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
           <div class="grid md:grid-cols-[32px_1fr] gap-3 items-center">
             <div class="font-semibold">1.</div>
             <input name="fav1" value="<?= e($fav['fav1'] ?? '') ?>" maxlength="80"
-                   class="w-full px-4 py-3 rounded-xl border bg-white"
+                   class="w-full px-4 py-3 rounded-xl border bg-white text-black"
                    placeholder="Pekerjaan favorit 1">
           </div>
 
           <div class="grid md:grid-cols-[32px_1fr] gap-3 items-center">
             <div class="font-semibold">2.</div>
             <input name="fav2" value="<?= e($fav['fav2'] ?? '') ?>" maxlength="80"
-                   class="w-full px-4 py-3 rounded-xl border bg-white"
+                   class="w-full px-4 py-3 rounded-xl border bg-white text-black"
                    placeholder="Pekerjaan favorit 2">
           </div>
 
           <div class="grid md:grid-cols-[32px_1fr] gap-3 items-center">
             <div class="font-semibold">3.</div>
             <input name="fav3" value="<?= e($fav['fav3'] ?? '') ?>" maxlength="80"
-                   class="w-full px-4 py-3 rounded-xl border bg-white"
+                   class="w-full px-4 py-3 rounded-xl border bg-white text-black"
                    placeholder="Pekerjaan favorit 3">
           </div>
 
@@ -171,18 +172,18 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
                href="tes_start.php">Mulai Tes</a>
           <?php endif; ?>
 
-          <a class="px-6 py-3 rounded-xl border bg-white hover:bg-slate-50" href="hasil.php">Lihat Hasil</a>
+          <a class="px-6 py-3 rounded-xl border bg-white hover:bg-slate-50 text-black" href="hasil.php">Lihat Hasil</a>
         </div>
       </div>
 
       <!-- MODE OFFLINE -->
-      <div class="mt-6 border rounded-xl p-5 bg-slate-50">
+      <div class="mt-6 border rounded-xl p-5 bg-slate-50 text-black">
         <div class="font-semibold">Mode Offline (PWA)</div>
-        <p class="text-sm text-slate-600 mt-1">
+        <p class="text-sm text-slate-600 mt-1 text-black">
           Siapkan paket tes saat online agar tes bisa dimulai dari nol ketika internet mati.
           Hasil offline ditandai sementara sampai tersinkron.
         </p>
-        <div class="flex flex-wrap gap-2 mt-3">
+        <div class="flex flex-wrap gap-2 mt-3 text-black">
           <a class="px-5 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
              href="../offline/tes.html">Buka Tes Offline</a>
           <button id="btnPack"

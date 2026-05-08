@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (!$user || !password_verify($password, $user['password'])) {
     $error = "Username atau password salah.";
   } else {
-    // simpan session minimal yang dibutuhkan
     $_SESSION['user'] = [
       'id_pengguna'   => (int)$user['id_pengguna'],
       'username'      => $user['username'],
@@ -29,12 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'role'          => (int)$user['role'],
     ];
 
-    // tambahan data peserta untuk kebutuhan offline (role=2)
     if ((int)$user['role'] === 2) {
       $stp = db()->prepare("SELECT id_peserta, nama, jenis_kelamin, pendidikan, tgl_lahir
                             FROM tbl_peserta WHERE id_pengguna=? LIMIT 1");
       $stp->execute([(int)$user['id_pengguna']]);
       $peserta = $stp->fetch();
+
       if ($peserta) {
         $_SESSION['user']['id_peserta'] = (int)$peserta['id_peserta'];
         $_SESSION['user']['nama_peserta'] = (string)($peserta['nama'] ?? '');
@@ -44,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    // redirect berdasarkan role
     if ((int)$user['role'] === 1) redirect('admin/dashboard.php');
     redirect('peserta/dashboard.php');
   }
@@ -62,17 +60,40 @@ $title = "Login RMIB";
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
   <title><?= e($title) ?></title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .login-bg {
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
+        url('/icons/login.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+
+<body class="login-bg text-slate-800">
   <div class="min-h-screen flex items-center justify-center p-6">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-sm border p-6">
+    <div class="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border p-6">
       <div class="text-center mb-6">
-        <div class="text-xl font-semibold">Sistem Rekomendasi Pemilihan Jurusan</div>
-        <div class="text-slate-500">Tes RMIB</div>
+        <div class="text-xl font-semibold text-black">
+          Sistem Rekomendasi Pemilihan Jurusan
+        </div>
+
+        <div class="text-slate-600 mb-5">
+          Tes RMIB
+        </div>
+
         <div class="grid grid-cols-2 gap-2 mb-6">
-      <a class="text-center py-2 rounded-xl bg-slate-100 hover:bg-slate-200 font-medium" href="login.php">Login</a>
-      <a class="text-center py-2 rounded-xl bg-slate-900 text-white font-medium" href="peserta/register.php">Register</a>
-    </div>
+          <a class="text-center py-2 rounded-xl bg-slate-100 hover:bg-slate-200 font-medium text-black" href="login.php">
+            Login
+          </a>
+          <a class="text-center py-2 rounded-xl bg-slate-900 text-white font-medium" href="peserta/register.php">
+            Register
+          </a>
+        </div>
       </div>
 
       <?php if ($error): ?>
@@ -83,17 +104,26 @@ $title = "Login RMIB";
 
       <form method="post" class="space-y-4">
         <div>
-          <label class="text-sm font-medium">Username</label>
-          <input name="username" required maxlength="25"
-                 class="mt-1 w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-slate-900/20">
-        </div>
-        <div>
-          <label class="text-sm font-medium">Password</label>
-          <input type="password" name="password" required
-                 class="mt-1 w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-slate-900/20">
+          <label class="text-sm font-medium text-black">Username</label>
+          <input 
+            name="username" 
+            required 
+            maxlength="25"
+            class="mt-1 w-full px-4 py-3 rounded-xl border text-black bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/20">
         </div>
 
-        <button class="w-full py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">
+        <div>
+          <label class="text-sm font-medium text-black">Password</label>
+          <input 
+            type="password" 
+            name="password" 
+            required
+            class="mt-1 w-full px-4 py-3 rounded-xl border text-black bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/20">
+        </div>
+
+        <button 
+          type="submit"
+          class="w-full py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">
           Login
         </button>
       </form>
@@ -101,9 +131,9 @@ $title = "Login RMIB";
   </div>
 
   <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
-  }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
   </script>
 </body>
 </html>

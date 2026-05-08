@@ -108,43 +108,58 @@ $active = "tes";
 include __DIR__ . '/../../views/peserta_layout_top.php';
 ?>
 
-<div class="flex">
+<div class="flex text-black">
   <?php include __DIR__ . '/../../views/peserta_sidebar.php'; ?>
 
-  <main class="flex-1 p-6">
-    <div class="flex items-center justify-between gap-4 mb-4">
+  <main class="flex-1 p-6 text-black">
+    <div class="flex items-center justify-between gap-4 mb-4 text-black">
       <div>
-        <h1 class="text-2xl font-semibold">Tes RMIB</h1>
-        <p class="text-slate-500">Kelompok <b><?= e($k) ?></b> — isi peringkat 1–12</p>
+        <h1 class="text-2xl font-semibold text-black">Tes RMIB</h1>
+        <p class="text-black">
+          Kelompok <b><?= e($k) ?></b> — isi peringkat 1–12
+        </p>
       </div>
-      <div class="px-4 py-2 rounded-xl bg-white border text-sm">
+
+      <div class="px-4 py-2 rounded-xl bg-white border text-sm text-black">
         Jenis Kelamin: <b><?= e($peserta['jenis_kelamin']) ?></b> | <?= e($peserta['nama']) ?>
       </div>
     </div>
 
     <?php if ($error): ?>
-      <div class="mb-4 p-3 rounded-xl bg-red-50 text-red-700 border border-red-200"><?= e($error) ?></div>
+      <div class="mb-4 p-3 rounded-xl bg-red-50 text-red-700 border border-red-200">
+        <?= e($error) ?>
+      </div>
     <?php endif; ?>
 
-    <form method="post" class="bg-white border rounded-2xl p-6">
-      <div class="overflow-x-auto">
-        <table class="min-w-full text-sm">
-          <thead>
-            <tr class="text-left border-b">
-              <th class="py-3 pr-4 w-12">No</th>
-              <th class="py-3 pr-4">Pekerjaan</th>
-              <th class="py-3 pr-4 w-44">Peringkat</th>
+    <form method="post" class="bg-white border rounded-2xl p-6 text-black">
+      <div class="overflow-x-auto text-black">
+        <table class="min-w-full text-sm text-black">
+          <thead class="text-black">
+            <tr class="text-left border-b text-black">
+              <th class="py-3 pr-4 w-12 text-black">No</th>
+              <th class="py-3 pr-4 text-black">Pekerjaan</th>
+              <th class="py-3 pr-4 w-44 text-black">Peringkat</th>
             </tr>
           </thead>
-          <tbody>
-            <?php foreach ($jobs as $i => $job): $pid=(int)$job['id_pekerjaan']; ?>
-              <tr class="border-b last:border-b-0">
-                <td class="py-3 pr-4"><?= $i+1 ?></td>
-                <td class="py-3 pr-4"><?= e($job['nama_pekerjaan']) ?></td>
-                <td class="py-3 pr-4">
-                  <input type="number" name="rank[<?= $pid ?>]" min="1" max="12" step="1"
-                         value="<?= $pref[$pid] ?? '' ?>"
-                         class="w-full px-3 py-2 rounded-xl border bg-white focus:ring-2 focus:ring-slate-900/20">
+
+          <tbody class="text-black">
+            <?php foreach ($jobs as $i => $job): $pid = (int)$job['id_pekerjaan']; ?>
+              <tr class="border-b last:border-b-0 text-black">
+                <td class="py-3 pr-4 text-black"><?= $i + 1 ?></td>
+
+                <td class="py-3 pr-4 text-black">
+                  <?= e($job['nama_pekerjaan']) ?>
+                </td>
+
+                <td class="py-3 pr-4 text-black">
+                  <input 
+                    type="number" 
+                    name="rank[<?= $pid ?>]" 
+                    min="1" 
+                    max="12" 
+                    step="1"
+                    value="<?= $pref[$pid] ?? '' ?>"
+                    class="w-full px-3 py-2 rounded-xl border bg-white text-black focus:ring-2 focus:ring-slate-900/20">
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -152,18 +167,24 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
         </table>
       </div>
 
-      <div class="mt-6 flex items-center justify-between gap-3">
+      <div class="mt-6 flex items-center justify-between gap-3 text-black">
         <div>
           <?php if ($prev): ?>
-            <a class="inline-flex px-5 py-3 rounded-xl border bg-white hover:bg-slate-50"
-               href="tes_wizard.php?sesi=<?= $sesi ?>&k=<?= $prev ?>">Sebelumnya</a>
+            <a class="inline-flex px-5 py-3 rounded-xl border bg-white text-black hover:bg-slate-50"
+               href="tes_wizard.php?sesi=<?= $sesi ?>&k=<?= $prev ?>">
+              Sebelumnya
+            </a>
           <?php else: ?>
-            <a class="inline-flex px-5 py-3 rounded-xl border bg-white hover:bg-slate-50"
-               href="tes.php">Kembali</a>
+            <a class="inline-flex px-5 py-3 rounded-xl border bg-white text-black hover:bg-slate-50"
+               href="tes.php">
+              Kembali
+            </a>
           <?php endif; ?>
         </div>
 
-        <button class="inline-flex px-6 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">
+        <button 
+          type="submit"
+          class="inline-flex px-6 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">
           <?= ($k === 'I') ? 'Selesai' : 'Selanjutnya' ?>
         </button>
       </div>
