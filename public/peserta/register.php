@@ -130,10 +130,11 @@ $title = "Register Peserta";
           class="mt-1 w-full px-4 py-3 rounded-xl border text-black focus:ring-2 focus:ring-slate-900/20">
       </div>
 
-    </form>
-
-      <button class="w-full py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">Register</button>
-    </form>
+    <button 
+        type="submit"
+        class="w-full py-3 rounded-xl bg-slate-900 text-white font-semibold hover:opacity-95">
+        Register
+      </button>
   </div>
 </div>
 </body>
