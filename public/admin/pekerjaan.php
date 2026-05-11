@@ -409,10 +409,6 @@ include __DIR__ . '/../../views/admin_layout_top.php';
                   </option>
                 <?php endforeach; ?>
               </select>
-
-              <div class="text-xs text-slate-500 mt-1">
-                A=1, B=2, ..., I=9.
-              </div>
             </div>
 
             <div>
@@ -539,7 +535,7 @@ include __DIR__ . '/../../views/admin_layout_top.php';
                     <div class="flex gap-2">
                       <a href="pekerjaan.php?action=edit_mapping&id=<?= (int)$r['id_pekerjaan'] ?>&k=<?= e($k) ?>&jk=<?= e($jk) ?>"
                          class="px-3 py-2 rounded-xl bg-blue-600 text-white hover:opacity-95 text-xs">
-                        <?= $idKat > 0 ? 'Edit Mapping' : 'Set Kategori' ?>
+                        <?= $idKat > 0 ? 'Mapping' : 'Set Kategori' ?>
                       </a>
 
                       <form method="post"
