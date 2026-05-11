@@ -180,8 +180,7 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
       <div class="mt-6 border rounded-xl p-5 bg-slate-50 text-black">
         <div class="font-semibold">Mode Offline (PWA)</div>
         <p class="text-sm text-slate-600 mt-1 text-black">
-          Siapkan paket tes saat online agar tes bisa dimulai dari nol ketika internet mati.
-          Hasil offline ditandai sementara sampai tersinkron.
+          Siapkan paket tes ketika internet mati, Hasil offline ditandai sementara sampai tersinkron.
         </p>
         <div class="flex flex-wrap gap-2 mt-3 text-black">
           <a class="px-5 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
