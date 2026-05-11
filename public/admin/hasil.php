@@ -167,6 +167,11 @@ include __DIR__ . '/../../views/admin_layout_top.php';
                         View
                       </a>
 
+                      <a href="download_pdf.php?sesi_id=<?= (int)$r['id_sesi'] ?>"
+                        class="px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">
+                        Download PDF
+                      </a>
+
                       <!-- HAPUS: cara seperti pekerjaan.php (POST ke halaman ini sendiri) -->
                       <form method="post" onsubmit="return confirm('Yakin hapus hasil ini?');" class="inline">
                         <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">

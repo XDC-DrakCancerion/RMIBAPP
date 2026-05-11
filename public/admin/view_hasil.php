@@ -275,12 +275,7 @@ include __DIR__ . '/../../views/admin_layout_top.php';
           </div>
         <?php endforeach; ?>
       </div>
-      
-      <a href="download_pdf.php?sesi_id=<?= e($sesiId) ?>"
-        class="inline-flex items-center px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">
-        Download PDF
-      </a>
-
+    
       <div class="mt-4 text-xs text-slate-500">
         Total keseluruhan skor: <strong><?= e(array_sum($categoryTotals)) ?></strong> (validasi: harus 702)
       </div>
