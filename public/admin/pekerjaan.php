@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../app/admin_guard.php';
 require_once __DIR__ . '/../../app/helpers.php';
 
 $action = $_GET['action'] ?? 'list';
+
 if (!in_array($action, ['list', 'Tambah', 'edit_mapping'], true)) {
   $action = 'list';
 }
@@ -250,10 +251,12 @@ include __DIR__ . '/../../views/admin_layout_top.php';
           Dashboard
         </a>
 
-        <a class="px-4 py-2 rounded-xl bg-slate-900 text-white hover:opacity-95"
-           href="pekerjaan.php?action=Tambah&k=<?= e($k) ?>&jk=<?= e($jk) ?>">
-          + Tambah
-        </a>
+        <?php if ($action === 'list'): ?>
+          <a class="px-4 py-2 rounded-xl bg-slate-900 text-white hover:opacity-95"
+             href="pekerjaan.php?action=Tambah&k=<?= e($k) ?>&jk=<?= e($jk) ?>">
+            + Tambah
+          </a>
+        <?php endif; ?>
       </div>
     </div>
 
@@ -437,18 +440,18 @@ include __DIR__ . '/../../views/admin_layout_top.php';
               required
               class="mt-1 w-full px-4 py-3 rounded-xl border"
               placeholder="Contoh:
-Dokter
-Perawat
-Apoteker
-Guru
-Arsitek
-Programmer
-Akuntan
-Desainer
-Musisi
-Teknisi
-Peneliti
-Administrasi"></textarea>
+                Dokter
+                Perawat
+                Apoteker
+                Guru
+                Arsitek
+                Programmer
+                Akuntan
+                Desainer
+                Musisi
+                Teknisi
+                Peneliti
+                Administrasi"></textarea>
           </div>
 
           <div class="flex gap-2">
@@ -561,7 +564,7 @@ Administrasi"></textarea>
         </div>
 
         <div class="mt-4 text-xs text-slate-500">
-          Tips: Pastikan Kelompok <?= e($k) ?> JK <?= e($jk) ?> memiliki minimal 12 item dan semua sudah di-mapping ke kategori.
+          Tips: Pastikan Kelompok <?= e($k) ?> Jenis Kelamin <?= e($jk) ?> memiliki minimal 12 item dan semua sudah di-mapping ke kategori.
         </div>
       </div>
 
