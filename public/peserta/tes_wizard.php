@@ -114,8 +114,8 @@ include __DIR__ . '/../../views/peserta_layout_top.php';
   <main class="flex-1 p-6 text-black">
     <div class="flex items-center justify-between gap-4 mb-4 text-black">
       <div>
-        <h1 class="text-2xl font-semibold text-black">Tes RMIB</h1>
-        <p class="text-black">
+        <h1 class="text-2xl font-semibold text-white">Tes RMIB</h1>
+        <p class="text-white">
           Kelompok <b><?= e($k) ?></b> — isi peringkat 1–12
         </p>
       </div>
